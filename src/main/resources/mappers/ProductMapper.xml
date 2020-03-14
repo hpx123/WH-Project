@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wh.dao.ProductMapper" >
+  <resultMap id="BaseResultMap" type="com.wh.pojo.Product" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="proname" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="product_image" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="production_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="expiration_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="exptime" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="add_date" jdbcType="DATE" javaType="java.util.Date" />
+      <arg column="stock" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="property" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="detail" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, proname, product_image, production_date, expiration_date, exptime, add_date, 
+    stock, property, status, detail, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from whpro_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from whpro_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wh.pojo.Product" >
+    insert into whpro_product (id, user_id, proname, 
+      product_image, production_date, expiration_date, 
+      exptime, add_date, stock, 
+      property, status, detail, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{proname,jdbcType=VARCHAR}, 
+      #{productImage,jdbcType=VARCHAR}, #{productionDate,jdbcType=DATE}, #{expirationDate,jdbcType=DATE}, 
+      #{exptime,jdbcType=INTEGER}, #{addDate,jdbcType=DATE}, #{stock,jdbcType=INTEGER}, 
+      #{property,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{detail,jdbcType=VARCHAR}, 
+      now(), now())
+  </insert>
+  <insert id="insertSelective" parameterType="com.wh.pojo.Product" >
+    insert into whpro_product
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="proname != null" >
+        proname,
+      </if>
+      <if test="productImage != null" >
+        product_image,
+      </if>
+      <if test="productionDate != null" >
+        production_date,
+      </if>
+      <if test="expirationDate != null" >
+        expiration_date,
+      </if>
+      <if test="exptime != null" >
+        exptime,
+      </if>
+      <if test="addDate != null" >
+        add_date,
+      </if>
+      <if test="stock != null" >
+        stock,
+      </if>
+      <if test="property != null" >
+        property,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="proname != null" >
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productionDate != null" >
+        #{productionDate,jdbcType=DATE},
+      </if>
+      <if test="expirationDate != null" >
+        #{expirationDate,jdbcType=DATE},
+      </if>
+      <if test="exptime != null" >
+        #{exptime,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=DATE},
+      </if>
+      <if test="stock != null" >
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="property != null" >
+        #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wh.pojo.Product" >
+    update whpro_product
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="proname != null" >
+        proname = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null" >
+        product_image = #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="productionDate != null" >
+        production_date = #{productionDate,jdbcType=DATE},
+      </if>
+      <if test="expirationDate != null" >
+        expiration_date = #{expirationDate,jdbcType=DATE},
+      </if>
+      <if test="exptime != null" >
+        exptime = #{exptime,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null" >
+        add_date = #{addDate,jdbcType=DATE},
+      </if>
+      <if test="stock != null" >
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="property != null" >
+        property = #{property,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = now(),
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wh.pojo.Product" >
+    update whpro_product
+    set user_id = #{userId,jdbcType=INTEGER},
+      proname = #{proname,jdbcType=VARCHAR},
+      product_image = #{productImage,jdbcType=VARCHAR},
+      production_date = #{productionDate,jdbcType=DATE},
+      expiration_date = #{expirationDate,jdbcType=DATE},
+      exptime = #{exptime,jdbcType=INTEGER},
+      add_date = #{addDate,jdbcType=DATE},
+      stock = #{stock,jdbcType=INTEGER},
+      property = #{property,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      detail = #{detail,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUserID" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from whpro_user a,whpro_product b where a.id=#{userID} and a.id=b.user_id
+  </select>
+
+</mapper>
